@@ -43,24 +43,24 @@ disease_info = {
 
 # Symptom to index mapping
 symptom_to_index = {
-    "fever": 0,
-    "headache": 1,
-    "cough": 2,
-    "fatigue": 3,
+    "cansancio": 0,
+    "ansiedad": 1,
+    "irritable": 2,
+    "tristeza": 3,
     "nausea": 4,
-    "chills": 5,
-    "dizziness": 6,
-    "shortness of breath": 7,
-    "muscle pain": 8,
-    "sore throat": 9
+    "frustración": 5,
+    "desinterés": 6,
+    "insomnio": 7,
+    "desconcentrado": 8,
+    "desesperanza": 9
 }
 
 # Page title
-st.title("Health Assistant AI")
+st.title("Asistente de salud mental AI")
 
 # Input form with checkboxes or radio buttons
-st.subheader("Select Symptoms")
-st.write("Please select your symptoms from the list below.")
+st.subheader("Como te sientes?")
+st.write("Selecciona como te sientes")
 
 # Symptom options
 symptom_options = list(symptom_to_index.keys())
@@ -111,4 +111,4 @@ if st.button("Diagnose"):
         st.warning("Please select at least one symptom to diagnose!")
 
 # Footer
-st.write("Built with ❤️ using Streamlit and TensorFlow")
+st.write("Gracias por usar nuestro servicio❤️")
