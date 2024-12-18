@@ -104,7 +104,7 @@ if st.button("Diagnóstico"):
             confidence_message = "El modelo es moderadamente confiable en la predicción."
         
         # Display confidence message
-        st.write(f"Nivel de Confiabilidad": {prediction_prob * 100:.2f}%")
+        st.write(f"Confidence": {prediction_prob * 100:.2f}%")
         st.write(confidence_message)
 
     else:
