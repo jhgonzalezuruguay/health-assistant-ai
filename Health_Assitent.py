@@ -111,4 +111,4 @@ if st.button("Diagnóstico"):
         st.warning("Selecciona un síntoma para su diagnóstico!")
 
 # Footer
-st.write("VITAL le agradece por usar y confiar en nuestro servicio ❤️")
+st.write("VITAL LE AGRADECE POR CONFIAR Y USAR NUESTRO SERVICIO!! ❤️")
