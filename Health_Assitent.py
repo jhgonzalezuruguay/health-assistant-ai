@@ -99,16 +99,16 @@ if st.button("Diagnóstico"):
         if prediction_prob >= 0.8:
             confidence_message = "El modelo es altamente confiable en la predicción."
         elif prediction_prob >= 0.5:
-            confidence_message = "El modelo es medianamente confiable en la predicción."
+            confidence_message = "El modelo es confiable en la predicción."
         else:
-            confidence_message = "El modelo es de baja confiabolodad en la predicción."
+            confidence_message = "El modelo es moderadamente confiable en la predicción."
         
         # Display confidence message
-        st.write(f"Confidence: {prediction_prob * 100:.2f}%")
+        st.write(f"Nivel de Confiabilidad": {prediction_prob * 100:.2f}%")
         st.write(confidence_message)
 
     else:
         st.warning("Selecciona un síntoma para su diagnóstico!")
 
 # Footer
-st.write("VITAL le agradece por usar y canfiar en nuestro servicio ❤️")
+st.write("VITAL le agradece por usar y confiar en nuestro servicio ❤️")
