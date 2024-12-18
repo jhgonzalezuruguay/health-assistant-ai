@@ -56,20 +56,20 @@ symptom_to_index = {
 }
 
 # Page title
-st.title("Asistente de salud mental AI")
+st.title("VITAL: Asistente de salud mental con IA")
 
 # Input form with checkboxes or radio buttons
-st.subheader("Como te sientes?")
+st.subheader("¿Como te sientes?!")
 st.write("Selecciona como te sientes")
 
 # Symptom options
 symptom_options = list(symptom_to_index.keys())
 
 # User selects symptoms
-selected_symptoms = st.multiselect("Choose Symptoms", symptom_options)
+selected_symptoms = st.multiselect("Selecciona los Síntomas", symptom_options)
 
 # Predict button
-if st.button("Diagnose"):
+if st.button("Diagnóstico"):
     if selected_symptoms:
         # Create a 142-length feature vector, where each symptom corresponds to a specific index
         features = np.zeros(142)  # Assuming model expects 142 features
@@ -86,7 +86,7 @@ if st.button("Diagnose"):
         predicted_class = np.argmax(prediction)
         
         # Retrieve disease information using the predicted class
-        disease_info = disease_info.get(predicted_class + 1, {"name": "Unknown disease", "description": "No description available"})
+        disease_info = disease_info.get(predicted_class + 1, {"name": "Consulte a un Profesional en Salud Mental", "description": "Consulte a un Profesional en Salud Mental"})
 
         # Show prediction result
         st.success(f"Predicted Disease: {disease_info['name']}")
@@ -97,18 +97,18 @@ if st.button("Diagnose"):
         # Confidence level message
         prediction_prob = np.max(prediction)
         if prediction_prob >= 0.8:
-            confidence_message = "The model is highly confident in this prediction."
+            confidence_message = "El modelo es altamente confiable en la predicción."
         elif prediction_prob >= 0.5:
-            confidence_message = "The model is moderately confident in this prediction."
+            confidence_message = "El modelo es medianamente confiable en la predicción."
         else:
-            confidence_message = "The model is not very confident in this prediction."
+            confidence_message = "El modelo es de baja confiabolodad en la predicción."
         
         # Display confidence message
         st.write(f"Confidence: {prediction_prob * 100:.2f}%")
         st.write(confidence_message)
 
     else:
-        st.warning("Please select at least one symptom to diagnose!")
+        st.warning("Selecciona un síntoma para su diagnóstico!")
 
 # Footer
-st.write("Gracias por usar nuestro servicio❤️")
+st.write("VITAL le agradece por usar y canfiar en nuestro servicio ❤️")
