@@ -82,9 +82,9 @@ if st.button("Diagnóstico"):
         features = features.reshape(1, -1)
         
         # Realizar la predicción
-        prediction = model.predict(features)
-        predicted_class = np.argmax(prediction)
-        prediction_prob = np.max(prediction)
+        ######prediction = model.predict(features)
+        ######predicted_class = np.argmax(prediction)
+        #####prediction_prob = np.max(prediction)
         
         # Obtener la información de la enfermedad basada en la clase predicha
         disease = disease_info.get(predicted_class + 1, {
