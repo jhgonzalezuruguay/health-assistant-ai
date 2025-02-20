@@ -3,11 +3,11 @@ import numpy as np
 from tensorflow.keras.models import load_model
 
 # Cargar el modelo entrenado (asegúrate de que se haya reentrenado con el nuevo mapeo de síntomas)
-@st.cache_resource
-def load_trained_model():
-    return load_model("symptom_based_diagnosis_model_updated.h5")
+#@st.cache_resource
+#def load_trained_model():
+#    return load_model("symptom_based_diagnosis_model_updated.h5")
 
-model = load_trained_model()
+#model = load_trained_model()
 
 # Diccionario actualizado de enfermedades mentales con descripciones
 disease_info = {
