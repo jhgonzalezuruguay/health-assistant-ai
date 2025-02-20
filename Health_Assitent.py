@@ -109,8 +109,7 @@ if st.button("Diagnóstico"):
         # Display confidence message
         st.write(f"Confidence: {prediction_prob * 100:.2f}%")
         st.write(confidence_message)
-
-        else:
+else:
         st.warning("Selecciona un síntoma para su diagnóstico!")
 
 # Footer
