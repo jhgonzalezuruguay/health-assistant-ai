@@ -7,7 +7,7 @@ from tensorflow.keras.models import load_model
 #def load_trained_model():
 #    return load_model("symptom_based_diagnosis_model_updated.h5")
 #model = load_model(r"C:\Users\user\Desktop\stanford\Untitled1.ipynb0 - Colab_files\my_model.keras")
-#model = "my_model.keras"
+model = "my_model.keras"
 
 # Diccionario actualizado de enfermedades mentales con descripciones
 disease_info = {
