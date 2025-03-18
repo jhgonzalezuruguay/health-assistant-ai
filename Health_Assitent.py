@@ -1,15 +1,19 @@
+import os
 import streamlit as st
 import numpy as np
 from tensorflow.keras.models import load_model
 
-# Cargar el modelo entrenado (asegúrate de que se haya reentrenado con el nuevo mapeo de síntomas)
-#@st.cache_resource
-#def load_trained_model():
-#    return load_model("symptom_based_diagnosis_model_updated.h5")
-#model = load_model(r"C:\Users\user\Desktop\stanford\Untitled1.ipynb0 - Colab_files\my_model.keras")
-model = "my_model.keras"
+# Define the path to your model file
+model_path = "my_model.keras"
 
-# Diccionario actualizado de enfermedades mentales con descripciones
+# Check if the model file exists
+if not os.path.exists(model_path):
+    raise FileNotFoundError(f"Model file not found at {model_path}")
+
+# Load the Keras model
+model = load_model(model_path)
+
+# Updated disease information dictionary
 disease_info = {
     1: {"name": "Trastorno de Ansiedad Generalizada", "description": "Ansiedad excesiva y preocupación persistente en múltiples situaciones, interfiriendo con la vida diaria."},
     2: {"name": "Depresión Mayor", "description": "Estado de ánimo deprimido, pérdida de interés, cambios en el apetito y dificultades en el funcionamiento diario."},
@@ -29,7 +33,7 @@ disease_info = {
     16: {"name": "Trastorno Límite de la Personalidad", "description": "Inestabilidad en las relaciones interpersonales, autoimagen y emociones, acompañada de impulsividad significativa."}
 }
 
-# Diccionario actualizado de síntomas a índices (asegúrate de que el modelo se haya entrenado con este mapeo)
+# Updated symptom to index dictionary
 symptom_to_index = {
     "cansancio": 0,
     "ansiedad": 1,
@@ -52,65 +56,65 @@ symptom_to_index = {
     "agitación": 18
 }
 
-# Título de la aplicación
+# Title of the application
 st.title("VITAL: Asistente de salud mental con IA")
 
-# Formulario de entrada
+# Input form
 st.subheader("¿Cómo te sientes?")
 st.write("Selecciona los síntomas que presentas:")
 
-# Opciones de síntomas basadas en el diccionario actualizado
+# Symptom options based on the updated dictionary
 symptom_options = list(symptom_to_index.keys())
 selected_symptoms = st.multiselect("Síntomas", symptom_options)
 
-# Botón para realizar la predicción
+# Prediction button
 if st.button("Diagnóstico"):
     if not selected_symptoms:
         st.error("Por favor, selecciona al menos un síntoma para realizar el diagnóstico.")
     else:
-        # Actualiza el vector de características a la longitud de los síntomas disponibles
+        # Update the feature vector to the length of available symptoms
         num_features = len(symptom_to_index)
         features = np.zeros(num_features)
         
-        # Codificar los síntomas seleccionados
+        # Encode the selected symptoms
         for symptom in selected_symptoms:
             index = symptom_to_index.get(symptom.strip())
             if index is not None and index < num_features:
                 features[index] = 1
         
-        # Remodelar el vector para adaptarse a la entrada del modelo
+        # Reshape the feature vector to fit the model input
         features = features.reshape(1, -1)
         
-        # Realizar la predicción
-        ######prediction = model.predict(features)
-        ######predicted_class = np.argmax(prediction)
-        #####prediction_prob = np.max(prediction)
+        # Make the prediction
+        prediction = model.predict(features)
+        predicted_class = np.argmax(prediction)
+        prediction_prob = np.max(prediction)
         
-        # Obtener la información de la enfermedad basada en la clase predicha
+        # Get disease information based on the predicted class
         disease = disease_info.get(predicted_class + 1, {
             "name": "Diagnóstico Inconcluso",
             "description": "Se recomienda consultar a un profesional en salud mental para una evaluación completa."
         })
         
-        # Mostrar el resultado
+        # Display the result
         st.success(f"Diagnóstico: {disease['name']}")
         st.write(f"**Descripción:** {disease['description']}")
         st.write(f"**Confianza en la predicción:** {prediction_prob * 100:.2f}%")
         
-        # Mensaje de confianza
+        # Confidence message
         if prediction_prob >= 0.8:
             st.info("El modelo es altamente confiable en la predicción.")
         elif prediction_prob >= 0.5:
             st.info("El modelo es confiable en la predicción.")
         else:
             st.warning("El modelo es moderadamente confiable en la predicción. Se recomienda consultar a un profesional.")
-
-
-        # Display confidence message
-        st.write(f"Confidence: {prediction_prob * 100:.2f}%")
-        st.write(confidence_message)
 else:
-        st.warning("Selecciona un síntoma para su diagnóstico!")
+    st.warning("Selecciona un síntoma para su diagnóstico!")
 
 # Footer
 st.write("VITAL LE AGRADECE POR CONFIAR Y USAR NUESTRO SERVICIO!! ❤️")
+
+
+
+
+
