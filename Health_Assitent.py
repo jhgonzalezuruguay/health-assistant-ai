@@ -2,14 +2,14 @@ import os
 import streamlit as st
 import numpy as np
 from tensorflow.keras.models import load_model
-from tensorflow.keras.models import model_from_json
 
 # Define the path to your model file
 model_path = "my_model.keras"
 
 # Check if the model file exists
 if not os.path.exists(model_path):
-    raise FileNotFoundError(f"Model file not found at {model_path}")
+    st.error(f"Model file not found at {model_path}. Please ensure the file is uploaded and accessible.")
+    st.stop()
 
 # Load the Keras model with error handling
 try:
@@ -122,12 +122,6 @@ else:
 
 # Footer
 st.write("VITAL LE AGRADECE POR CONFIAR Y USAR NUESTRO SERVICIO!! ❤️")
-
-
-
-
-
-
 
 
 
