@@ -4,7 +4,7 @@ import numpy as np
 from tensorflow.keras.models import load_model
 
 # Define the path to your model file
-model_path = "my_model.keras"
+model_path = "Untitled1.ipynb0 - Colab_files"
 
 # Check if the model file exists
 if not os.path.exists(model_path):
