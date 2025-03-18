@@ -2,6 +2,7 @@ import os
 import streamlit as st
 import numpy as np
 from tensorflow.keras.models import load_model
+from tensorflow.keras.models import model_from_json
 
 # Define the path to your model file
 model_path = "my_model.keras"
@@ -10,8 +11,12 @@ model_path = "my_model.keras"
 if not os.path.exists(model_path):
     raise FileNotFoundError(f"Model file not found at {model_path}")
 
-# Load the Keras model
-model = load_model(model_path)
+# Load the Keras model with error handling
+try:
+    model = load_model(model_path)
+except ValueError as e:
+    st.error(f"Error loading the model: {e}")
+    st.stop()
 
 # Updated disease information dictionary
 disease_info = {
@@ -86,9 +91,13 @@ if st.button("Diagnóstico"):
         features = features.reshape(1, -1)
         
         # Make the prediction
-        prediction = model.predict(features)
-        predicted_class = np.argmax(prediction)
-        prediction_prob = np.max(prediction)
+        try:
+            prediction = model.predict(features)
+            predicted_class = np.argmax(prediction)
+            prediction_prob = np.max(prediction)
+        except Exception as e:
+            st.error(f"Error making prediction: {e}")
+            st.stop()
         
         # Get disease information based on the predicted class
         disease = disease_info.get(predicted_class + 1, {
@@ -113,6 +122,14 @@ else:
 
 # Footer
 st.write("VITAL LE AGRADECE POR CONFIAR Y USAR NUESTRO SERVICIO!! ❤️")
+
+
+
+
+
+
+
+
 
 
 
